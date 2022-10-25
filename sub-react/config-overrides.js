@@ -20,6 +20,7 @@ module.exports = {
       config.headers = {
         'Access-Control-Allow-Origin': '*',
       };
+      console.log('----config.hot',config.hot)
       // Return your customised Webpack Development Server config.
       return config;
     };

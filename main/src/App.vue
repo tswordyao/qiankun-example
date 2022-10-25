@@ -6,7 +6,7 @@
     <div class="layout-header">
       <div class="logo">QIANKUN-EXAMPLE</div>
       <ul class="sub-apps">
-        <li v-for="item in microApps" :class="{active: item.activeRule === current}" :key="item.name" @click="goto(item)">{{ item.name }}</li>
+        <li v-for="app in microApps" :class="{active: app.activeRule === current}" :key="app.name" @click="goto(app)">{{ app.name }}</li>
       </ul>
       <div class="userinfo">主应用的state：{{ JSON.stringify(state) }}</div>
     </div>
@@ -51,11 +51,11 @@ export default {
   methods: {
     goto (item) {
       history.pushState(null, item.activeRule, item.activeRule)
-      // this.current = item.name
+      // this.current = item.name // 在bindCurrent里实现了
     },
     bindCurrent () {
       const path = window.location.pathname
-      if (this.microApps.findIndex(item => item.activeRule === path) >= 0) {
+      if (this.microApps.some(item => item.activeRule === path)) {
         this.current = path
       }
     },

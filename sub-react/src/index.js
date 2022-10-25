@@ -12,7 +12,7 @@ import * as serviceWorker from './serviceWorker';
 function render() {
   ReactDOM.render(
     <App />,
-    document.getElementById('root')
+    document.getElementById('root') // 如果这里没用做判断的话，最好这个容器id是跨应用唯一的
   );
 }
 
@@ -47,6 +47,7 @@ export async function unmount() {
 }
 /**
  * 可选生命周期钩子，仅使用 loadMicroApp 方式加载微应用时生效
+ * loadMicroApp在这个示例项目和现有yatop项目中都没有使用
  */
 export async function update(props) {
   console.log('update props', props);

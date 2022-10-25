@@ -7,7 +7,8 @@ const render = (options) => {
 
   
   document.querySelector('#current-env').innerHTML = 'qiankun'
-  const globalState = options.getGlobalState()
+  
+  const globalState = options?.getGlobalState? options.getGlobalState() : {}
 
   // 展示基座下发的状态
   const node = document.createElement('div')
@@ -18,19 +19,22 @@ const render = (options) => {
   return Promise.resolve();
 };
 
-(global => {
-  global['prehtml'] = {
+// 很诡异，这里的名字随便取，也没有export， 只要对象里有bootstrap、mount、unmount，就会被找到并调用。经过测试，如果window下多一层级就识别不到，必须把对象直接挂在window下
+window['pre222html222'] = {
     bootstrap: () => {
-      console.log('purehtml bootstrap');
+      console.warn('pre222html222 bootstrap');
       return Promise.resolve();
     },
     mount: (options) => {
-      console.log('purehtml mount', options);
+      console.log(alert('purehtml mount', options));
       return render(options);
     },
     unmount: () => {
-      console.log('purehtml unmount');
+      console.log(alert('-------purehtml unmount'));
+      return Promise.resolve();
+    },
+    unmount2: () => {
+      console.log(alert('-------purehtml unmoun2'));
       return Promise.resolve();
     },
   };
-})(window);
